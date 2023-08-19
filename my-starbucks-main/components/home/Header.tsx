@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from '../../styles/Header.module.scss';
 import Image from 'next/image';
 import { TbSearch } from 'react-icons/tb';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Header() {
   const [isBadgeAppear, setIsBadgeApper] = useState<boolean>(true);
@@ -32,6 +32,7 @@ function Header() {
                 height={75}
                 width={75}
                 unoptimized
+                priority
                 placeholder="blur"
                 blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
               />
