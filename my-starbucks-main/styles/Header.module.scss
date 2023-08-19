@@ -183,4 +183,17 @@ $dropdown-title-font-size: 14px;
       }
     }
   }
+
+  .headerContainer__badges {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    top: 132px;
+    right: 12px;
+
+    img {
+      border-radius: 10px;
+    }
+  }
 }

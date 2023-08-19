@@ -10,12 +10,14 @@ const globalFont = Arimo({
 export default function Home() {
   return (
     //헤더 position: fixed 테스트용 높이
-    <div className={globalFont.className} style={{ height: '200vh' }}>
+    <>
       <Head>
         <title>Create Next App</title>
       </Head>
-      <Header />
-      <div>스타벅스 메인 화면 클론 프로젝트</div>
-    </div>
+      <div className={globalFont.className} style={{ height: '200vh' }}>
+        <Header />
+        <div>스타벅스 메인 화면 클론 프로젝트</div>
+      </div>
+    </>
   );
 }
