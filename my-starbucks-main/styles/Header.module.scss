@@ -1,0 +1,186 @@
+$sub-menu-font-size: 13px;
+$sub-menu-font-color: #656565;
+$main-menu-font-size: 13px;
+$main-menu-font-color: #333333;
+$hover-font-color: #669900;
+$dropdown-background-color: #333;
+$dropdown-small-font-size: 12px;
+$dropdown-title-font-size: 14px;
+
+.headerContainer {
+  height: 120px;
+  width: 100%;
+  background-color: #f6f5f0;
+  position: fixed;
+  border-bottom: 1px solid #c8c8c8;
+
+  .headerContainer__menuBox {
+    position: relative;
+    margin: 0 auto;
+    height: 100%;
+    width: 1100px;
+
+    .menuBox__logo {
+      position: absolute;
+      height: 75px;
+      width: 75px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    .menuBox__subMenuBox {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      top: 10px;
+      right: 0;
+      font-size: $sub-menu-font-size;
+
+      .subMenuBox__menu {
+        display: flex;
+
+        li::before {
+          content: '';
+          display: block;
+          width: 1px;
+          height: 12px;
+          background-color: #e5e5e5;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+        }
+
+        li:first-child::before {
+          /* 첫번째 요소를 삭제, 가장 왼쪽의 구분선 삭제 */
+          display: none;
+        }
+
+        a {
+          color: #656565;
+          text-decoration: none;
+          padding: 11px 16px;
+
+          &:hover {
+            color: black;
+          }
+        }
+      }
+
+      .subMenuBox__searchBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border: 1px solid $sub-menu-font-color;
+        border-radius: 8px;
+
+        button {
+          font-size: 20px;
+          height: 34px;
+          width: 34px;
+        }
+
+        .searchBox__inputText {
+          display: none;
+        }
+
+        &:hover {
+          .searchBox__inputText {
+            margin: 0px 10px;
+            display: block;
+            width: 200px;
+            border: none;
+          }
+        }
+      }
+    }
+
+    .menuBox__mainMenuBox {
+      position: absolute;
+      display: flex;
+      top: 60px;
+      right: 0;
+
+      .mainMenuBox__itemContents {
+        padding: 10px 20px 35px;
+
+        .itemContents__itemName {
+          font-size: $main-menu-font-size;
+        }
+
+        .itemContents__dropDownContents {
+          display: none;
+        }
+
+        &:hover {
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          flex-direction: column;
+          background-color: #333;
+          color: $hover-font-color;
+
+          .itemContents__dropDownContents {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            background-color: #333;
+            width: 100%;
+            left: 0;
+            top: 120px;
+
+            .dropDownContents__inner,
+            .dropDownContents__textContents {
+              padding: 30px calc((100% - 1100px) / 2);
+            }
+
+            .dropDownContents__inner {
+              display: flex;
+              gap: 150px;
+              color: white;
+
+              ul {
+                color: $sub-menu-font-color;
+                font-size: $sub-menu-font-size;
+              }
+
+              li > h4 {
+                padding: 12px 0px;
+                font-size: $dropdown-title-font-size;
+              }
+
+              li > ul > li {
+                padding: 5px 0px;
+                font-size: $dropdown-small-font-size;
+              }
+
+              li > ul > li:hover {
+                color: $hover-font-color;
+              }
+            }
+
+            .dropDownContents__textContents {
+              background-image: url('../public/images/main_menu_pattern.jpg');
+              font-size: $dropdown-small-font-size;
+
+              .textContents__inner {
+                li {
+                  padding: 8px 0px;
+                  h4 {
+                    color: #999;
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                  }
+                  p {
+                    color: $hover-font-color;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
