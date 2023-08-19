@@ -1,9 +1,8 @@
 $sub-menu-font-size: 13px;
-$sub-menu-font-color: #656565;
 $main-menu-font-size: 13px;
-$main-menu-font-color: #333333;
 $hover-font-color: #669900;
 $dropdown-background-color: #333;
+$dropdown-font-color: #999;
 $dropdown-small-font-size: 12px;
 $dropdown-title-font-size: 14px;
 
@@ -22,11 +21,10 @@ $dropdown-title-font-size: 14px;
 
     .menuBox__logo {
       position: absolute;
-      height: 75px;
-      width: 75px;
       top: 0;
       bottom: 0;
       margin: auto;
+      object-fit: cover;
     }
 
     .menuBox__subMenuBox {
@@ -73,7 +71,7 @@ $dropdown-title-font-size: 14px;
         justify-content: center;
         align-items: center;
         background-color: white;
-        border: 1px solid $sub-menu-font-color;
+        border: 1px solid $dropdown-font-color;
         border-radius: 8px;
 
         button {
@@ -102,6 +100,7 @@ $dropdown-title-font-size: 14px;
       display: flex;
       top: 60px;
       right: 0;
+      z-index: 1;
 
       .mainMenuBox__itemContents {
         padding: 10px 20px 35px;
@@ -141,7 +140,7 @@ $dropdown-title-font-size: 14px;
               color: white;
 
               ul {
-                color: $sub-menu-font-color;
+                color: $dropdown-font-color;
                 font-size: $sub-menu-font-size;
               }
 
@@ -191,9 +190,34 @@ $dropdown-title-font-size: 14px;
     gap: 15px;
     top: 132px;
     right: 12px;
+    animation: appear 1s ease-in both;
 
     img {
       border-radius: 10px;
     }
+
+    &.badges_disappear {
+      animation: disappear 1s ease-in both;
+    }
+  }
+}
+
+// 키프레임 모아두기
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

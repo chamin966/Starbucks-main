@@ -2,8 +2,24 @@ import Link from 'next/link';
 import styles from '../../styles/Header.module.scss';
 import Image from 'next/image';
 import { TbSearch } from 'react-icons/tb';
+import { useEffect, useMemo, useState } from 'react';
 
 function Header() {
+  const [isBadgeAppear, setIsBadgeApper] = useState<boolean>(true);
+
+  const evalScrollY = () => {
+    if (window.scrollY > 500) setIsBadgeApper(false);
+    else setIsBadgeApper(true);
+    console.log(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', evalScrollY);
+    return () => {
+      window.removeEventListener('scroll', evalScrollY);
+    };
+  });
+
   return (
     <header>
       <div className={styles.headerContainer}>
@@ -13,7 +29,8 @@ function Header() {
               <Image
                 src={'/images/starbucks_logo.png'}
                 alt="STATBUCKS"
-                fill
+                height={75}
+                width={75}
                 unoptimized
                 placeholder="blur"
                 blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
@@ -26,13 +43,13 @@ function Header() {
                 <Link href="/signin">Sign In</Link>
               </li>
               <li>
-                <Link href="javascript:void(0)">My Starbucks</Link>
+                <Link href="#">My Starbucks</Link>
               </li>
               <li>
-                <Link href="javascript:void(0)">Customer Service & Ideas</Link>
+                <Link href="#">Customer Service & Ideas</Link>
               </li>
               <li>
-                <Link href="javascript:void(0)">Find a Store</Link>
+                <Link href="#">Find a Store</Link>
               </li>
             </ul>
             <div className={styles.subMenuBox__searchBox}>
@@ -371,13 +388,18 @@ function Header() {
             </li>
           </ul>
         </div>
-        <div className={styles.headerContainer__badges}>
+        <div
+          className={`${styles.headerContainer__badges} ${
+            isBadgeAppear ? '' : styles.badges_disappear
+          }`}
+        >
           <div className={styles.badges__badge}>
             <Image
               src={'/images/badge3.jpg'}
               alt="Badge"
               height={230}
               width={130}
+              priority
             />
           </div>
           <div className={styles.badges__badge}>
@@ -386,6 +408,7 @@ function Header() {
               alt="Badge"
               height={86}
               width={130}
+              priority
             />
           </div>
         </div>
