@@ -197,29 +197,5 @@ $dropdown-title-font-size: 14px;
     img {
       border-radius: 10px;
     }
-
-    &.badges_disappear {
-      animation: disappear 1s ease-in both;
-    }
-  }
-}
-
-// 키프레임 모아두기
-@keyframes disappear {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    display: none;
-  }
-}
-
-@keyframes appear {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }

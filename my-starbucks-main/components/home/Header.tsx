@@ -2,15 +2,25 @@ import Link from 'next/link';
 import styles from '../../styles/Header.module.scss';
 import Image from 'next/image';
 import { TbSearch } from 'react-icons/tb';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 function Header() {
-  const [isBadgeAppear, setIsBadgeApper] = useState<boolean>(true);
+  const badgeRef = useRef<HTMLDivElement>(null);
 
   const evalScrollY = () => {
-    if (window.scrollY > 500) setIsBadgeApper(false);
-    else setIsBadgeApper(true);
-    console.log(window.scrollY);
+    let tl = gsap.timeline();
+    if (window.scrollY > 500) {
+      tl.to(badgeRef.current, {
+        opacity: 0,
+        display: 'none',
+      });
+    } else {
+      tl.to(badgeRef.current, {
+        opacity: 1,
+        display: 'flex',
+      });
+    }
   };
 
   useEffect(() => {
@@ -389,11 +399,7 @@ function Header() {
             </li>
           </ul>
         </div>
-        <div
-          className={`${styles.headerContainer__badges} ${
-            isBadgeAppear ? '' : styles.badges_disappear
-          }`}
-        >
+        <div className={styles.headerContainer__badges} ref={badgeRef}>
           <div className={styles.badges__badge}>
             <Image
               src={'/images/badge3.jpg'}
