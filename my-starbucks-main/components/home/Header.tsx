@@ -2,25 +2,46 @@ import Link from 'next/link';
 import styles from '../../styles/Header.module.scss';
 import Image from 'next/image';
 import { TbSearch } from 'react-icons/tb';
+import { IoArrowUp } from 'react-icons/io5';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 
 function Header() {
   const badgeRef = useRef<HTMLDivElement>(null);
+  const scrollToTopBtnRef = useRef<HTMLButtonElement>(null);
 
   const evalScrollY = () => {
-    let tl = gsap.timeline();
     if (window.scrollY > 500) {
-      tl.to(badgeRef.current, {
+      gsap.to(badgeRef.current, {
         opacity: 0,
+        duration: 0.6,
         display: 'none',
       });
+      gsap.to(scrollToTopBtnRef.current, {
+        x: 0,
+        duration: 0.2,
+      });
     } else {
-      tl.to(badgeRef.current, {
+      gsap.to(badgeRef.current, {
         opacity: 1,
+        duration: 0.6,
         display: 'flex',
       });
+      gsap.to(scrollToTopBtnRef.current, {
+        ease: 'elastic',
+        x: 100,
+        duration: 0.2,
+      });
     }
+  };
+
+  const onClickToTop = () => {
+    gsap.registerPlugin(ScrollToPlugin);
+    gsap.to(window, {
+      duration: 0,
+      scrollTo: 0,
+    });
   };
 
   useEffect(() => {
@@ -29,6 +50,11 @@ function Header() {
       window.removeEventListener('scroll', evalScrollY);
     };
   });
+
+  useEffect(() => {
+    // 최초 시작시에 scrollTop 버튼이 보이지 않도록 하기 위함
+    evalScrollY();
+  }, []);
 
   return (
     <header>
@@ -420,6 +446,13 @@ function Header() {
           </div>
         </div>
       </div>
+      <button
+        className={styles.scrollToTopButton}
+        ref={scrollToTopBtnRef}
+        onClick={onClickToTop}
+      >
+        <IoArrowUp />
+      </button>
     </header>
   );
 }
