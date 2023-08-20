@@ -2,23 +2,34 @@ import Link from 'next/link';
 import styles from '../../styles/Header.module.scss';
 import Image from 'next/image';
 import { TbSearch } from 'react-icons/tb';
-import { useEffect, useRef } from 'react';
+import { IoArrowUp } from 'react-icons/io5';
+import { ButtonHTMLAttributes, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 function Header() {
   const badgeRef = useRef<HTMLDivElement>(null);
+  const scrollToTopBtnRef = useRef<HTMLButtonElement>(null);
 
   const evalScrollY = () => {
-    let tl = gsap.timeline();
     if (window.scrollY > 500) {
-      tl.to(badgeRef.current, {
+      gsap.to(badgeRef.current, {
         opacity: 0,
+        duration: 0.6,
         display: 'none',
       });
+      gsap.to(scrollToTopBtnRef.current, {
+        x: 0,
+        duration: 0.2,
+      });
     } else {
-      tl.to(badgeRef.current, {
+      gsap.to(badgeRef.current, {
         opacity: 1,
+        duration: 0.6,
         display: 'flex',
+      });
+      gsap.to(scrollToTopBtnRef.current, {
+        x: 100,
+        duration: 0.2,
       });
     }
   };
@@ -420,6 +431,9 @@ function Header() {
           </div>
         </div>
       </div>
+      <button className={styles.scrollToTopButton} ref={scrollToTopBtnRef}>
+        <IoArrowUp />
+      </button>
     </header>
   );
 }
